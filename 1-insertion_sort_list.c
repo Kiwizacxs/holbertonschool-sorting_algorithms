@@ -15,36 +15,37 @@
  *
  * Return: None.
  */
-void insertion_sort_list(listint_t **unordered_list)
+void insertion_sort_list(unordered_list)
+listint_t **unordered_list;
 {
-	if (unordered_list == NULL || *unordered_list == NULL || (*unordered_list)->next == NULL)
-		return;
+    listint_t *current_node;
 
-	listint_t *current_node;
+    if (unordered_list == NULL || *unordered_list == NULL || (*unordered_list)->next == NULL)
+        return;
 
-	current_node = (*unordered_list)->next;
+    current_node = (*unordered_list)->next;
 
-	while (current_node != NULL)
-	{
-		listint_t *prev_node = current_node->prev;
-		listint_t *temp_node = current_node->next;
+    while (current_node != NULL)
+    {
+        listint_t *prev_node = current_node->prev;
+        listint_t *temp_node = current_node->next;
 
-		for (; prev_node != NULL && prev_node->n > current_node->n; prev_node = prev_node->prev)
-		{
-			if (prev_node->prev != NULL)
-				prev_node->prev->next = current_node;
-			else
-				*unordered_list = current_node;
+        for (; prev_node != NULL && prev_node->n > current_node->n; prev_node = prev_node->prev)
+        {
+            if (prev_node->prev != NULL)
+                prev_node->prev->next = current_node;
+            else
+                *unordered_list = current_node;
 
-			current_node->prev = prev_node->prev;
-			current_node->next = prev_node;
-			prev_node->prev = current_node;
+            current_node->prev = prev_node->prev;
+            current_node->next = prev_node;
+            prev_node->prev = current_node;
 
-			if (temp_node != NULL)
-				temp_node->prev = prev_node;
-		}
+            if (temp_node != NULL)
+                temp_node->prev = prev_node;
+        }
 
-		current_node = temp_node;
-		print_list(*unordered_list);
-	}
+        current_node = temp_node;
+        print_list(*unordered_list);
+    }
 }
