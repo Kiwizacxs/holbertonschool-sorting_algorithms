@@ -4,6 +4,15 @@
  * insertion_sort_list - Rearranges a doubly linked list of integers
  * in ascending order using the Insertion Sort algorithm.
  * @unordered_list: A pointer to a list that is currently unordered.
+ *
+ * Description:
+ * This function applies the Insertion Sort algorithm to organize
+ * a doubly linked list of integers in ascending order. The list is
+ * provided through the pointer @unordered_list. The function iterates
+ * through the list, comparing and rearranging elements to achieve the
+ * desired ordering. The progress of the sorting process is visualized
+ * by printing the list at each step.
+ *
  * Return: None.
  */
 void insertion_sort_list(listint_t **unordered_list)
