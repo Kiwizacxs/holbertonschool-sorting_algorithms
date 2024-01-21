@@ -1,48 +1,39 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - Sorts a doubly linked list of integers in ascending
- *                      order using the Insertion sort algorithm.
- *
- * @list: A double pointer to the head of the linked list.
+ * insertion_sort_list - Rearranges a doubly linked list of integers
+ * in ascending order using the Insertion Sort algorithm.
+ * @unordered_list: A pointer to a list that is currently unordered.
+ * Return: None.
  */
-void insertion_sort_list(listint_t **list)
+void insertion_sort_list(listint_t **unordered_list)
 {
-    listint_t *temp, *current;
+	if (unordered_list == NULL || *unordered_list == NULL || (*unordered_list)->next == NULL)
+		return;
 
-    if (list == NULL || *list == NULL || (*list)->next == NULL)
-        return;
+	listint_t *current_node = (*unordered_list)->next;
 
-    current = *list;
+	while (current_node != NULL)
+	{
+		listint_t *prev_node = current_node->prev;
+		listint_t *temp_node = current_node->next;
 
-    while (current != NULL)
-    {
-        temp = current->next;
+		for (; prev_node != NULL && prev_node->n > current_node->n; prev_node = prev_node->prev)
+		{
+			if (prev_node->prev != NULL)
+				prev_node->prev->next = current_node;
+			else
+				*unordered_list = current_node;
 
-        while (temp != NULL && current->n > temp->n)
-        {
-            current->next = temp->next;
+			current_node->prev = prev_node->prev;
+			current_node->next = prev_node;
+			prev_node->prev = current_node;
 
-            if (temp->next != NULL)
-                temp->next->prev = current;
+			if (temp_node != NULL)
+				temp_node->prev = prev_node;
+		}
 
-            temp->prev = current->prev;
-
-            if (current->prev != NULL)
-                current->prev->next = temp;
-            else
-                *list = temp;
-
-            current->prev = temp;
-            temp->next = current;
-
-            if (current->next != NULL)
-                current->next->prev = current;
-
-            current = temp->prev;
-            print_list(*list);
-        }
-
-        current = temp;
-    }
+		current_node = temp_node;
+		print_list(*unordered_list);
+	}
 }
