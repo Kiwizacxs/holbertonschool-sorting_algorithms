@@ -20,7 +20,9 @@ void insertion_sort_list(listint_t **unordered_list)
 	if (unordered_list == NULL || *unordered_list == NULL || (*unordered_list)->next == NULL)
 		return;
 
-	listint_t *current_node = (*unordered_list)->next;
+	listint_t *current_node;
+
+	current_node = (*unordered_list)->next;
 
 	while (current_node != NULL)
 	{
